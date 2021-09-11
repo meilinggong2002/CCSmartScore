@@ -7,7 +7,7 @@
 // +----------------------------------------------------------------------
 // | Author: 明章科技
 // +----------------------------------------------------------------------
- 
+
 /**
  * Notes: 云初始化实例
  * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY www.code942.com
@@ -16,11 +16,11 @@
  */
 
 const ccminiConfig = require('../../comm/ccmini_config.js');
- 
+
 function getCloud() {
-	const cloud = require('wx-server-sdk');
+	const cloud = require('wx-server-sdk');  
 	cloud.init({
-		env: ccminiConfig.CCMINI_CLOUD_ID
+		env: cloud.DYNAMIC_CURRENT_ENV
 	});
 	return cloud;
 }

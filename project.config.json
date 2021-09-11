@@ -20,8 +20,8 @@
         "uploadWithSourceMap": true,
         "compileHotReLoad": false,
         "lazyloadPlaceholderEnable": false,
-        "useMultiFrameRuntime": false,
-        "useApiHook": false,
+        "useMultiFrameRuntime": true,
+        "useApiHook": true,
         "useApiHostProcess": false,
         "babelSetting": {
             "ignore": [],
