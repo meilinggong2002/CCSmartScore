@@ -35,6 +35,10 @@
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0830/112444_41cc1ef5_9240987.png "成绩样本.png")
 
 # 部署教程：
+### 0. 了解小程序云开发的基础知识
+-  参考微信小程序官方文档：
+- https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html
+- https://developers.weixin.qq.com/miniprogram/dev/wxcloud/quick-start/miniprogram.html
 
 ### 1 源码导入微信开发者工具
   ![输入图片说明](https://images.gitee.com/uploads/images/2021/0830/112152_4d096b50_9240987.png "导入.png")
