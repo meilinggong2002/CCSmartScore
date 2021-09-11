@@ -59,9 +59,9 @@
  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0828/115003_bd34f305_9240987.png "终端打开.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0828/115018_49563860_9240987.png "安装依赖.png")
 
-- 打开cloudfunctions/score_cloud/comm/ccmini_config.js文件，配置环境ID和后台管理员账号和密码
+- 打开cloudfunctions/sport_cloud/comm/ccmini_config.js文件，配置后台管理员账号和密码
 
- ![输入图片说明](https://images.gitee.com/uploads/images/2021/0828/101826_cc2cf912_9645159.png "云函数-服务和管理配置.png")
+ ![输入图片说明](https://images.gitee.com/uploads/images/2021/0911/150146_a9af88e5_9240987.png "设置管理员账号.png")
 
 #### 本系统需要导入Excel文件，需要在云函数安装Excel内库支持，
 - 在云函数cloudfunctions文件夹下选择云函数score_cloud , 右键选择在终端中打开,然后执行 
