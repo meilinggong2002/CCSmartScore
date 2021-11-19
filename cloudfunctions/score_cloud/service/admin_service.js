@@ -218,26 +218,14 @@ class AdminService extends BaseCCMiniService {
 	}
 
 	async statusUser(id, status) {
-		status = Number(status)
-		let data = {
-			USER_STATUS: status
-		}
-		let where = {
-			'USER_MINI_OPENID': id
-		}
-		await UserModel.edit(where, data);
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 
 
 
 	}
 
 	async delUser(id) {
-		let whereUser = {
-			USER_MINI_OPENID: id
-		}
-
-
-		UserModel.del(whereUser);
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 
 
 
@@ -254,28 +242,7 @@ class AdminService extends BaseCCMiniService {
 		content
 	}) {
 
-		// 重复性判断
-		let where = {
-			NEWS_TITLE: title,
-		}
-		if (await NewsModel.count(where))
-			this.ccminiAppError('该标题已经存在');
-
-		// 赋值 
-		let data = {};
-		data.NEWS_TITLE = title;
-		data.NEWS_CONTENT = content;
-		data.NEWS_CATE = cate;
-		data.NEWS_DESC = ccminiStrUtil.fmtText(content, 100);
-
-		data.NEWS_ADMIN_ID = adminId;
-
-		let id = await NewsModel.insert(data);
-
-
-		return {
-			id
-		};
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 	async delNews(id) {
@@ -283,59 +250,21 @@ class AdminService extends BaseCCMiniService {
 			_id: id
 		}
 
-		// 取出图片数据
-		let news = await NewsModel.getOne(where, 'NEWS_PIC');
-		if (!news) return;
-
-		await NewsModel.del(where);
-
-		let gradeWhere = {
-			GRADE_NEWS_ID: id
-		}
-		await GradeModel.del(gradeWhere);
-
-		// 异步删除图片 
-		let cloudIds = ccminiStrUtil.getArrByKey(news.NEWS_PIC, 'cloudId');
-		ccminiCloudUtil.deleteFiles(cloudIds);
-
-
-		return;
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 
 	async delGrade(id) {
-		let where = {
-			_id: id
-		}
-
-		await GradeModel.del(where);
-		return;
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 
 	async statScoreCnt(newsId) {
-		let where = {
-			GRADE_NEWS_ID: newsId,
-		}
-		let cnt = await GradeModel.count(where);
-
-		let data = {
-			NEWS_SCORE_CNT: cnt
-		}
-		await NewsModel.edit(newsId, data);
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 	async clearGrade(id) {
-		let where = {
-			GRADE_NEWS_ID: id
-		}
-
-		await GradeModel.del(where);
-
-		//异步统计
-		this.statScoreCnt(id);
-
-		return;
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 	async getNewsDetail(id) {
@@ -359,22 +288,7 @@ class AdminService extends BaseCCMiniService {
 		imgList
 	}) {
 
-		let newList = await ccminiCloudUtil.getTempFileURL(imgList);
-
-		let news = await NewsModel.getOne(newsId, 'NEWS_PIC');
-
-		let picList = await ccminiCloudUtil.handlerCloudFiles(news.NEWS_PIC, newList);
-
-		let data = {
-			NEWS_PIC: picList
-		};
-		await NewsModel.edit(newsId, data);
-
-		let urls = ccminiStrUtil.getArrByKey(picList, 'url');
-
-		return {
-			urls
-		};
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 
 	}
 
@@ -387,20 +301,7 @@ class AdminService extends BaseCCMiniService {
 		desc
 	}) {
 
-		let where = {
-			NEWS_TITLE: title,
-			_id: ['<>', id]
-		}
-		if (await NewsModel.count(where))
-			this.ccminiAppError('该标题已经存在');
-
-		let data = {};
-		data.NEWS_TITLE = title;
-		data.NEWS_CATE = cate;
-		data.NEWS_CONTENT = content;
-		data.NEWS_DESC = ccminiStrUtil.fmtText(desc, 100);
-
-		await NewsModel.edit(id, data);
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 	async getNewsList({
@@ -522,128 +423,15 @@ class AdminService extends BaseCCMiniService {
 	}
 
 	async statusNews(id, status) {
-		let data = {
-			NEWS_STATUS: status
-		}
-		let where = {
-			_id: id,
-		}
-		return await NewsModel.edit(where, data);
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 	async sortNews(id, sort) {
-		sort = Number(sort)
-		let data = {
-			NEWS_ORDER: sort
-		}
-		await NewsModel.edit(id, data);
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 	async importGrade(newsId, cloudId) {
-		const xlsx = require('node-xlsx');
-
-		console.log('############IMPORT SCORE BEGIN....');
-
-		console.log('[IMPORT SCORE]Read Data File');
-		const cloud = ccminiCloudBase.getCloud();
-		const res = await cloud.downloadFile({
-			fileID: cloudId,
-		})
-		const buffer = await res.fileContent;
-
-		// 删除文件
-		ccminiCloudUtil.deleteFiles([cloudId]);
-
-		const sheets = await xlsx.parse(buffer);
-		const content = sheets[0].data
-		content.splice(0, 1)
-
-		console.log('[IMPORT SCORE]Get SCORE Data begin');
-		let where = {
-			GRADE_NEWS_ID: newsId
-		}
-		let allDBGradeData = await GradeModel.getAll(where, 'GRADE_NAME,GRADE_NUM,GRADE_SCORE', {}, 1000000);
-		console.log('[IMPORT SCORE]Get SCORE Data COUNT=' + allDBGradeData.length);
-
-
-		console.log('[IMPORT SCORE]Insert Data');
-
-		let succ = 0;
-		let total = 0;
-		let allGradeData = []; //用户数据 
-		for (let k in content) {
-			total++;
-
-			let line = content[k];
-			if (line.length < 3) {
-				console.error('[' + k + ']Line ERR', line);
-				continue;
-			};
-
-			//if (total >= 20) break;    
-
-			let gradeData = {};
-			gradeData.GRADE_NEWS_ID = newsId;
-
-			// 姓名
-			let name = line[0] + '';
-			if (!name || name.length < 2) {
-				console.error('[' + k + ']name ERR:', line);
-				continue;
-			}
-			gradeData.GRADE_NAME = name.trim();
-
-			// 学号
-			let num = line[1] + '';
-			if (!num || num.length < 2) {
-				console.error('[' + k + ']NUM ERR:', line);
-				continue;
-			}
-			gradeData.GRADE_NUM = num.trim();
-
-			// 成绩
-			let score = line[2] + '';
-			if (!score || score.length < 1) {
-				console.error('[' + k + ']SCORE ERR:', line);
-				continue;
-			}
-			gradeData.GRADE_SCORE = score.trim();
-
-			// 用户是否存在
-			if (ccminiStrUtil.checkObjArrExist(allGradeData, gradeData, ['GRADE_NUM'])) {
-				//console.error('[' + k + ']SELF USER EXIST ERR:', line);
-				continue;
-			}
-
-			if (ccminiStrUtil.checkObjArrExist(allDBGradeData, gradeData, ['GRADE_NUM'])) {
-				//console.error('[' + k + ']DB USER EXIST ERR:', line);
-				continue;
-			}
-
-			allGradeData.push(gradeData);
-
-			succ++;
-
-			if (total % 1000 == 0)
-				console.log('[' + k + '][IMPORT SCORE]Total=' + total + ', Succ=' + suc);
-		}
-
-		//批量插入
-		console.log('allGradeData CNT=' + allGradeData.length);
-		if (allGradeData.length > 0) {
-			GradeModel.insertBatch(allGradeData, 10000);
-		}
-
-
-		console.error('IMPORT SCORE DATA OVER, total=' + total + ', SUCC=' + succ);
-
-		//异步统计
-		this.statScoreCnt(newsId);
-
-		return {
-			total,
-			succ
-		}
+		this.ccminiAppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
 	}
 
 
