@@ -11,7 +11,7 @@
 /**
  * Notes: 后台管理模块
  * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY www.code942.com
- * Date: 2020-10-22 07:48:00 
+ * Date: 2021-10-22 07:48:00 
  */
 
 const BaseCCMiniService = require('./base_ccmini_service.js');
